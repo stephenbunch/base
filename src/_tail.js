@@ -9,7 +9,7 @@ if ( typeof module !== 'undefined' && module.exports ) {
       return exports;
     });
   }
-  window.linq = exports;
+  window.base = exports;
 }
 
 } () );

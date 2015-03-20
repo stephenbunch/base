@@ -13,6 +13,7 @@ module.exports = function( config ) {
         'node_modules/chai/chai.js',
         'node_modules/sinon/pkg/sinon.js',
         'node_modules/sinon-chai/lib/sinon-chai.js',
+        'test/_karma.js',
 
         'test/**/*.spec.js'
     ],

@@ -4,8 +4,8 @@ gulp.task( 'make', [ 'jshint' ], function() {
   var fs = require( 'fs' );
   var browserify = require( 'browserify' );
   var babelify = require( 'babelify' );
-  var pkg = require( APP_ROOT + '/package' );
   var source = require( 'vinyl-source-stream' );
+  var pkg = require( APP_ROOT + '/package' );
 
   return (
     browserify({

@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/stephenbunch/base",
   "devDependencies": {
+    "babel": "^5.1.10",
     "babelify": "^6.0.2",
     "browserify": "^9.0.8",
     "chai": "^1.9.1",

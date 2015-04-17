@@ -10,7 +10,7 @@ gulp.task( 'make', [ 'jshint' ], function() {
   var pkg = require( APP_ROOT + '/package' );
 
   var bundle = browserify({
-      entries: APP_ROOT + '/index.js',
+      entries: APP_ROOT + '/src/index.js',
       debug: true,
       standalone: pkg.name
     })

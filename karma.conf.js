@@ -26,7 +26,7 @@ module.exports = function( config ) {
     autoWatch: false,
     singleRun: false,
 
-    browsers: [ 'Chrome' ],
+    browsers: [ 'ChromeCanary' ],
 
     preprocessors: {
       'test/**/*.js': [ 'babel' ]

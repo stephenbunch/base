@@ -4,7 +4,7 @@ gulp.task( 'jshint', function() {
   var jshint = require( 'gulp-jshint' );
   var stylish = require( 'jshint-stylish' );
 
-  return gulp.src([ 'src/**/*.js', '!src/_*', 'test/**/*.js' ])
+  return gulp.src([ 'src/**/*.js', 'test/**/*.js' ])
     .pipe(
       jshint({
         debug: true,

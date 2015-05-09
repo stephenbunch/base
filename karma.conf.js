@@ -1,4 +1,4 @@
-var pkg = require( './package' );
+var PACKAGE = require( './package' );
 
 module.exports = function( config ) {
   config.set({
@@ -12,8 +12,7 @@ module.exports = function( config ) {
       'node_modules/babel/node_modules/babel-core/browser-polyfill.js',
       'test/_karma.js',
 
-      'dist/' + pkg.name + '.js',
-      { pattern: 'dist/' + pkg.name + '.js.map', included: false },
+      'dist/' + PACKAGE.name + '.js',
       { pattern: 'src/**/*.js', included: false },
 
       'test/**/*.spec.js'

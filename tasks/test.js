@@ -1,16 +1,15 @@
-var gulp = require( 'gulp' );
+import gulp from 'gulp';
 
 gulp.task( 'test:node', function() {
   var through2 = require( 'through2' );
   var Mocha = require( 'mocha' );
   var chai = require( 'chai' );
-  var pkg = require( APP_ROOT + '/package' );
 
   var sinonChai = require( 'sinon-chai' );
   chai.use( sinonChai );
 
   var mocha = new Mocha({ bail: true });
-  global[ pkg.name ] = require( APP_ROOT + '/src/index' );
+  global[ PACKAGE.name ] = require( APP_ROOT + '/src/index' );
   global.expect = chai.expect;
   global.sinon = require( 'sinon' );
 
@@ -25,7 +24,7 @@ gulp.task( 'test:node', function() {
           err.failures = failures;
           cb( err );
         } else {
-          delete global[ pkg.name ];
+          delete global[ PACKAGE.name ];
           delete global.expect;
           delete global.sinon;
           cb( null );

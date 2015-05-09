@@ -19,39 +19,33 @@ export function browserify( opts ) {
     sourceRoot: APP_ROOT + '/src'
   });
 
-  return (
-    browserify( browserifyOpts )
-      .transform( babelify.configure( babelOpts ) )
-  );
+  return browserify( browserifyOpts )
+    .transform( babelify.configure( babelOpts ) );
 }
 
 export function bundle( browserify, done ) {
   var source = require( 'vinyl-source-stream' );
   var _ = require( 'lodash' );
-  return (
-    browserify
-      .bundle()
-      .on( 'error', handleError )
-      .pipe( source( PACKAGE.name + '.js' ) )
-      .pipe( gulp.dest( 'dist' ) )
-      .on( 'end', done || _.noop )
-  );
+
+  return browserify
+    .bundle()
+    .on( 'error', handleError )
+    .pipe( source( PACKAGE.name + '.js' ) )
+    .pipe( gulp.dest( 'dist' ) )
+    .on( 'end', done || _.noop );
 }
 
 export function babel( files ) {
   var babel = require( 'gulp-babel' );
-  return (
-    gulp.src( files )
-      .pipe( babel( PACKAGE.babel ) )
-      .on( 'error', handleError )
-      .pipe( gulp.dest( APP_ROOT + '/lib' ) )
-  );
+
+  return gulp.src( files || APP_ROOT + '/src/**/*.js' )
+    .pipe( babel( PACKAGE.babel ) )
+    .on( 'error', handleError )
+    .pipe( gulp.dest( APP_ROOT + '/lib' ) );
 }
 
-gulp.task( 'js', [ 'jshint' ], function() {
+gulp.task( 'js', function() {
   var merge = require( 'merge-stream' );
-  return merge(
-    bundle( browserify() ),
-    babel( APP_ROOT + '/src/**/*.js' )
-  );
+
+  return merge( bundle( browserify() ), babel() );
 });

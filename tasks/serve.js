@@ -1,6 +1,6 @@
 import gulp from 'gulp';
 
-gulp.task( 'serve', [ 'make' ], function()  {
+gulp.task( 'serve', function()  {
   var karma = require( 'gulp-karma' )({ configFile: 'karma.conf.js' });
   var browserSync = require( 'browser-sync' ).create();
 
@@ -11,23 +11,27 @@ gulp.task( 'serve', [ 'make' ], function()  {
     }
   });
 
+  var watchify = require( 'watchify' );
+  var js = require( './js' );
+
+  var b = watchify( js.browserify( watchify.args ) );
+  b.on( 'update', make );
+
   function reload() {
     karma.run();
     browserSync.reload();
   }
 
-  var watchify = require( 'watchify' );
-  var js = require( './js' );
-  var b = watchify( js.browserify( watchify.args ) );
-  b.on( 'update', function( files ) {
+  function make( files ) {
     js.bundle( b, function() {
       reload();
       js.babel( files );
     });
-  });
-  js.bundle( b, reload );
+  }
 
   gulp.watch([ 'test/**/*' ], function() {
     karma.run();
   });
+
+  make();
 });
